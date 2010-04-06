@@ -2,6 +2,12 @@
 
 class StateChangesController extends AppController {
 	var $components = array('RequestHandler');
+	
+	//Set RequestHandler to accept svg reuqests
+	function beforeFilter() {
+		if($this->RequestHandler->ext == 'svg')
+			$this->RequestHandler->setcontent(array('svg'=>'image/svg+xml'));
+	}
 
 	function status() {
 		$status = $this->StateChange->find('first',
